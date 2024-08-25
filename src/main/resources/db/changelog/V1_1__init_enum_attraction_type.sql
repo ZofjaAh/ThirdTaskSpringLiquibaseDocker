@@ -1,2 +1,2 @@
 CREATE TYPE attraction_type AS ENUM
-('Palaces', 'Parks', 'Museums', 'Archaeological sites', 'Reserves');
+('palaces', 'parks', 'museums', 'archaeological_sites', 'reserves');

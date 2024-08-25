@@ -1,0 +1,68 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15.0
+    hostname: db
+    container_name: attraction_library
+    ports:
+      - "5432:5432"
+    networks:
+      - third_task
+    restart: always
+    environment:
+      POSTGRES_DB: attraction_library
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+
+  tomcat:
+    depends_on:
+      - liquibase
+    links:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./logs:/usr/local/tomcat/logs
+    ports:
+      - '8082:8080'
+    environment:
+      POSTGRES_URL: jdbc:postgresql://db/attraction_library
+      POSTGRES_DB: attraction_library
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - third_task
+  liquibase:
+    image: liquibase/liquibase
+    depends_on:
+      - db
+    environment:
+      - LIQUIBASE_SEARCH_PATH=/usr/local/tomcat/webapps/db/changelog
+    volumes:
+      - ./src/main/resources/db/changelog:/usr/local/tomcat/webapps/db/changelog
+    entrypoint:
+      - "liquibase"
+      - "--url=jdbc:postgresql://db/attraction_library"
+      - "--username=postgres"
+      - "--password=postgres"
+      - "--changeLogFile=db.changelog-master.xml"
+      - "update"
+
+    networks:
+      - third_task
+
+volumes:
+  logs:
+    driver: local
+networks:
+  third_task:
+
+

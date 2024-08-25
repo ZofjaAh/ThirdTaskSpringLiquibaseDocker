@@ -1,29 +1,79 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group = 'com.aston'
-version = '1.0-SNAPSHOT'
+
 
 repositories {
     mavenCentral()
 }
+ext {
+    logbackVersion = '1.4.12'
+    slf4jVersion = '1.7.25'
+    lombokVersion = '1.18.24'
+    springVersion = '6.0.20'
+    springDataVersion = '3.0.0'
+    jakartaApiVersion = '5.0.0'
+    hibernateVersion = '6.1.5.Final'
+    postgresqlDriverVersion = '42.7.2'
+    liquibaseVersion = '4.15.0'
+    junitVersion= '5.9.1'
+    mockitoVersion= '4.8.1'
+    mapstructVersion= '1.5.5.Final'
+    lombokMapstructBindingVersion = '0.2.0'
+    testContainersVersion= '1.17.5'
+
+}
+
 dependencies {
-    implementation 'org.springframework:spring-web:5.3.21'
-    implementation 'org.springframework:spring-context:5.3.21'
-    implementation 'org.springframework:spring-tx:5.3.21'
-    implementation 'org.springframework:spring-orm:5.3.21'
-    implementation 'org.springframework:spring-jdbc:5.3.21'
-    implementation 'org.hibernate:hibernate-core:5.6.10.Final'
-    implementation 'org.postgresql:postgresql:42.3.1'
-    implementation 'org.liquibase:liquibase-core:4.15.0'
-//    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-//    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-    annotationProcessor 'org.projectlombok:lombok'
-//    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBinding}"
-    compileOnly 'org.projectlombok:lombok'
-    testImplementation 'org.springframework:spring-test:5.3.21'
-    testImplementation 'junit:junit:4.13.2'
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+  implementation "org.springframework:spring-webmvc:$springVersion"
+    implementation "org.springframework:spring-web:$springVersion"
+    implementation "org.springframework:spring-core:$springVersion"
+    implementation "org.springframework:spring-beans:$springVersion"
+    implementation "org.springframework:spring-context:$springVersion"
+    implementation "org.springframework:spring-context-support:$springVersion"
+    implementation "org.springframework:spring-expression:$springVersion"
+    implementation "org.springframework:spring-jdbc:$springVersion"
+    implementation "org.springframework:spring-tx:$springVersion"
+  implementation "org.springframework:spring-orm:$springVersion"
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.3'
+
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+//compileOnly "jakarta.platform:jakarta.jakartaee-api:$jakartaApiVersion"
+    implementation "jakarta.servlet:jakarta.servlet-api:$jakartaApiVersion"
+
+    implementation "org.springframework.data:spring-data-jpa:$springDataVersion"
+    implementation "org.hibernate.orm:hibernate-core:$hibernateVersion"
+    implementation "org.postgresql:postgresql:$postgresqlDriverVersion"
+    implementation "org.liquibase:liquibase-core:$liquibaseVersion"
+   implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+   annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testImplementation "org.springframework:spring-test:$springVersion"
+
+//    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+//    testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
+//    testImplementation "org.testcontainers:junit-jupiter:$testContainersVersion"
+//    testImplementation "org.testcontainers:postgresql:$testContainersVersion"
+
+}
+
+jar {
+    archiveFileName = 'attraction_library.war'
+    webAppDirName = 'src/main/webapp'
 }
 
 test {
