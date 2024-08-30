@@ -31,7 +31,7 @@ public class LocalityEntity {
     @Column(name = "metro_availability")
     private Boolean metroAvailability;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "locality")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "locality")
     private Set<AttractionEntity> attractions;
 
 

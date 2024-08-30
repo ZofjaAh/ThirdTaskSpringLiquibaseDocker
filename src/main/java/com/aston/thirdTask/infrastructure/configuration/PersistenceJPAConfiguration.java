@@ -3,12 +3,10 @@ package com.aston.thirdTask.infrastructure.configuration;
 import com.aston.thirdTask.infrastructure.database.entity._EntityMarker;
 import com.aston.thirdTask.infrastructure.database.repository.jpa._JpaRepositoriesMarker;
 import jakarta.persistence.EntityManagerFactory;
-import liquibase.integration.spring.SpringLiquibase;
 import lombok.AllArgsConstructor;
 import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;

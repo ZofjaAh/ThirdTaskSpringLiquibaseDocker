@@ -36,24 +36,21 @@ public class LocalityRepository implements LocalityDAO {
     }
 
     @Override
-    public Locality changeLocality(Integer localityId, Integer population, Boolean metroAvailability) {
+    public int changeLocality(Integer localityId, Integer population, Boolean metroAvailability) {
         if (localityJpaRepository.findById(localityId).isPresent()) {
             log.info("Locality with Id: [{}] exists", localityId);
             if (Objects.nonNull(population)) {
                 log.info("Parameter attraction population is specified: [{}]", population);
                 if (Objects.nonNull(metroAvailability)) {
                     log.info("Parameter attraction metro availability is specified: [{}]", metroAvailability);
-                    return localityEntityMapper.mapFromEntity(
-                            localityJpaRepository.changeLocalityPopulationAndMetroAvailability(localityId, population, metroAvailability));
+                    return localityJpaRepository.changeLocalityPopulationAndMetroAvailability(localityId, population, metroAvailability);
                 } else {
                     log.info("Parameter attraction metro availability is null");
-                    return localityEntityMapper.mapFromEntity(
-                            localityJpaRepository.changeLocalityPopulation(localityId, population));
+                    return localityJpaRepository.changeLocalityPopulation(localityId, population);
                 }
             } else if (Objects.nonNull(metroAvailability)) {
                 log.info("Parameter attraction population is null");
-              return localityEntityMapper.mapFromEntity(
-                      localityJpaRepository.changeLocalityMetroAvailability(localityId, metroAvailability));
+              return  localityJpaRepository.changeLocalityMetroAvailability(localityId, metroAvailability);
             } else log.error("Parameters population and metro availability are nulls");
             throw new ProcessingException("Parameters population and metro availability are not specified");
         }

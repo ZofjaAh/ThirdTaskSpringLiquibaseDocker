@@ -16,7 +16,7 @@ public interface AttractionDAO {
 
 
 
-    Attraction changeAttractionDescription(Integer attractionId, String description);
+    int changeAttractionDescription(Integer attractionId, String description);
 
     void deleteAttraction(Integer attractionId);
 }

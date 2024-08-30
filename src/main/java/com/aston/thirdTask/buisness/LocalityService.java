@@ -33,7 +33,7 @@ public class LocalityService {
 }
 @Transactional
 
-    public Locality changeLocality(Integer localityId, Integer population, Boolean metroAvailability) {
+    public int changeLocality(Integer localityId, Integer population, Boolean metroAvailability) {
 
     return localityDAO.changeLocality(localityId, population, metroAvailability);
     }

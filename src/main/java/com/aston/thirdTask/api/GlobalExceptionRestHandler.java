@@ -38,11 +38,11 @@ public class GlobalExceptionRestHandler extends ResponseEntityExceptionHandler {
             @NonNull HttpStatusCode statusCode,
             @NonNull WebRequest request
     ) {
-        final String errorId = UUID.randomUUID().toString();
+
       log.error("[{}]", exception.getMessage());
-        log.error("exception: ID=[{}], HttpStatus=[{}], Exception=[{}]", errorId, statusCode, exception.getClass().getName());
+        log.error("exception: ID=[{}], HttpStatus=[{}]", statusCode, exception.getClass().getName());
         log.error("Exception trace:", exception);
-        return super.handleExceptionInternal(exception, ExceptionMessage.of(errorId), headers, statusCode, request);
+        return super.handleExceptionInternal(exception, ExceptionMessage.of(exception.getMessage()), headers, statusCode, request);
 
     }
     @ExceptionHandler(Exception.class)
@@ -57,12 +57,12 @@ public class GlobalExceptionRestHandler extends ResponseEntityExceptionHandler {
     }
 
     private ResponseEntity<?> doHandle(Exception exception, HttpStatus status){
-        final String errorId = UUID.randomUUID().toString();
-        log.error("exception: ID={}, HttpStatus={}", errorId, status, exception);
+        String message = exception.getMessage();
+        log.error("exception: message={}, HttpStatus={}", message, status, exception);
         return  ResponseEntity
                 .status(status)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(ExceptionMessage.of(errorId));
+                .body(ExceptionMessage.of(message));
 
     }
 

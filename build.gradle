@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 ext {
-    logbackVersion = '1.4.12'
+    logbackVersion = '1.4.14'
     slf4jVersion = '1.7.25'
     lombokVersion = '1.18.24'
     springVersion = '6.0.20'
@@ -18,7 +18,7 @@ ext {
     jakartaApiVersion = '5.0.0'
     hibernateVersion = '6.1.5.Final'
     postgresqlDriverVersion = '42.7.2'
-    liquibaseVersion = '4.15.0'
+
     junitVersion= '5.9.1'
     mockitoVersion= '4.8.1'
     mapstructVersion= '1.5.5.Final'
@@ -53,7 +53,7 @@ dependencies {
     implementation "org.springframework.data:spring-data-jpa:$springDataVersion"
     implementation "org.hibernate.orm:hibernate-core:$hibernateVersion"
     implementation "org.postgresql:postgresql:$postgresqlDriverVersion"
-    implementation "org.liquibase:liquibase-core:$liquibaseVersion"
+   
    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"

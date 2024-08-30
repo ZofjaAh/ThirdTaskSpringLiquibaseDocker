@@ -5,6 +5,7 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @ToString
+
 public enum AttractionType {
     PALACES,
     PARKS,

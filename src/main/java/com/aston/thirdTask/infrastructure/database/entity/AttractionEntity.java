@@ -33,6 +33,7 @@ public class AttractionEntity {
     private String description;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private AttractionType type;
 
     @ManyToOne(fetch = FetchType.LAZY)

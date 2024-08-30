@@ -34,7 +34,7 @@ public class AttractionService {
         return attractionDAO.findAllWithSortingAndFilter(sortingDirection,typeFilter);
     }
 @Transactional
-    public Attraction changeAttractionDescription(Integer attractionId, String description) {
+    public int changeAttractionDescription(Integer attractionId, String description) {
 
         return attractionDAO.changeAttractionDescription(attractionId, description);
     }

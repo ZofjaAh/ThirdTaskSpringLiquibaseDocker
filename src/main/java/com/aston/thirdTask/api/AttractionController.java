@@ -23,7 +23,7 @@ import java.util.Set;
 public class AttractionController {
     public static final String REST_ATTRACTION= "/rest/attraction";
     public static final String CREATE_ATTRACTION= "/create";
-    public static final String SHOW_ATTRACTIONS_BY_LOCATION = "/show/{locationName}";
+    public static final String SHOW_ATTRACTIONS_BY_LOCATION = "/show/{localityName}";
     public static final String CHANGE_ATTRACTION_DESCRIPTION = "/change/{attractionId}";
     public static final String SHOW_ALL_ATTRACTIONS = "/show_all";
     public static final String DELETE_ATTRACTION = "/delete/{attractionId}";
@@ -50,24 +50,23 @@ public class AttractionController {
     }
     @GetMapping(value = SHOW_ATTRACTIONS_BY_LOCATION)
     public AttractionsDTO showAttractionsByLocalityName(
-            @PathVariable String localityName){
+            @PathVariable("localityName") String localityName){
         localityService.findLocalityByName(localityName);
         return createAttractions(attractionService.findAttractionsByLocalityName(localityName));
 
     }
     @GetMapping(value = SHOW_ALL_ATTRACTIONS)
     public AttractionsDTO showAllAttractionsWithSortingAndFilter(
-            @RequestParam String sortingDirection,
-            @RequestParam String typeFilter){
+           @RequestParam(required = false) String sortingDirection,
+            @RequestParam(required = false) String typeFilter){
        return createAttractions(attractionService.findAttractionsWithSortingAndFilter(sortingDirection,typeFilter));
 
     }
     @PatchMapping(CHANGE_ATTRACTION_DESCRIPTION)
-    public AttractionDTO changeAttractionDescription(
+    public int changeAttractionDescription(
             @PathVariable Integer attractionId,
            @RequestParam String description){
-        return attractionMapper
-                .map(attractionService.changeAttractionDescription(attractionId, description));
+        return attractionService.changeAttractionDescription(attractionId, description);
 
     }
     @DeleteMapping(DELETE_ATTRACTION)

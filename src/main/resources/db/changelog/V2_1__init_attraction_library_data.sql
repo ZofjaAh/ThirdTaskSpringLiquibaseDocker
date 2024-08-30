@@ -19,11 +19,11 @@ SELECT SETVAL('service_service_id_seq', 5);
 
 insert into ATTRACTION (attraction_id, attraction_name, creation_date, description, type, locality_id)
 values
-(1, 'Old Town', '1339-01-01' ,'Warsaw central Old Town neighborhood','palaces', 1),
-(2, 'Wawel Castle', '1364-01-01', 'Historic castle in Krakow', 'palaces', 2),
-(3, 'Wroclaw Zoo', '1865-07-10', 'One of the oldest zoos in Poland', 'parks', 3),
-(4, 'Poznan Cathedral', '968-01-01', 'Oldest cathedral in Poland', 'museums', 4),
-(5, 'Gdansk Shipyard', '1945-01-01', 'Historic shipyard in Gdansk', 'archaeological_sites', 5);
+(1, 'Old Town', '1339-01-01' ,'Warsaw central Old Town neighborhood','PALACES', 1),
+(2, 'Wawel Castle', '1364-01-01', 'Historic castle in Krakow', 'PALACES', 2),
+(3, 'Wroclaw Zoo', '1865-07-10', 'One of the oldest zoos in Poland', 'PARKS', 3),
+(4, 'Poznan Cathedral', '968-01-01', 'Oldest cathedral in Poland', 'MUSEUMS', 4),
+(5, 'Gdansk Shipyard', '1945-01-01', 'Historic shipyard in Gdansk', 'ARCHAEOLOGICAL_SITES', 5);
 
 SELECT SETVAL('attraction_attraction_id_seq', 5);
 

@@ -15,21 +15,24 @@ import java.util.Set;
 
 @Repository
 public interface AttractionJpaRepository extends JpaRepository<AttractionEntity, Integer> {
+
+
     @Query("""
             SELECT att FROM AttractionEntity att
              LEFT JOIN FETCH att.locality locality
              WHERE locality.localityName = :name
              """)
-    Set<AttractionEntity> findByLocalityName(String name);
+    Set<AttractionEntity> findByLocalityName(@Param("name") String name);
 
     @Query("""
             SELECT att FROM AttractionEntity att
             WHERE att.type = :type
             """)
-    List<AttractionEntity> findAllWithSortAndFilter(String type, Sort sort);
+    List<AttractionEntity> findAllWithSortAndFilter(@Param("type") AttractionType type,
+                                                    Sort sort);
 
     @Query("SELECT att FROM AttractionEntity att WHERE att.type = :type")
-    List<AttractionEntity> findAllWithFilter(String type);
+    List<AttractionEntity> findAllWithFilter(@Param("type") AttractionType type);
 
     @Query("""
             SELECT att FROM AttractionEntity att
@@ -42,5 +45,9 @@ public interface AttractionJpaRepository extends JpaRepository<AttractionEntity,
             WHERE att.attractionId = :attractionId
             """
     )
-    Attraction changeAttractionDescriptionById(Integer attractionId, String description);
+    int changeAttractionDescriptionById(@Param("attractionId")Integer attractionId,
+                                               @Param("description") String description);
+    @Modifying
+    @Query(value = "DELETE FROM attraction_service WHERE attraction_id = :attractionId", nativeQuery = true)
+    void deleteAttractionServicesByAttractionId(@Param("attractionId") Integer attractionId);
 }

@@ -35,12 +35,11 @@ public class LocalityController {
     }
 
     @PatchMapping(CHANGE_LOCALITY)
-    public LocalityDTO changeLocality(
+    public int changeLocality(
             @PathVariable Integer localityId,
-           @RequestParam Integer population,
-           @RequestParam Boolean metroAvailability) {
-        return localityMapper.map(
-                localityService.changeLocality(localityId, population, metroAvailability));
+           @RequestParam(required = false) Integer population,
+            @RequestParam(required = false) Boolean metroAvailability) {
+        return localityService.changeLocality(localityId, population, metroAvailability);
 
     }
 }

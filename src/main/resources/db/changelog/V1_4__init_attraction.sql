@@ -3,7 +3,7 @@ CREATE TABLE attraction (
     attraction_name     VARCHAR(64)         NOT NULL,
     creation_date       DATE                NOT NULL,
     description         VARCHAR(128)        NOT NULL,
-    type                attraction_type     NOT NULL ,
+    type                VARCHAR(64)         NOT NULL ,
     locality_id         INT                 NOT NULL,
     PRIMARY KEY (attraction_id),
     UNIQUE (attraction_name, locality_id),
