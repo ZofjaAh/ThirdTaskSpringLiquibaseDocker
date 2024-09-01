@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="4" author="Sofya Aheyeva">
+        <createTable tableName="attraction_service">
+            <column name="attraction_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="attraction_service" columnNames="attraction_id, service_id"
+                       constraintName="pk_attraction_service"/>
+        <addForeignKeyConstraint
+                baseTableName="attraction_service"
+                baseColumnNames="attraction_id"
+                constraintName="fk_attraction_service_attraction"
+                referencedTableName="attraction"
+                referencedColumnNames="attraction_id"/>
+        <addForeignKeyConstraint
+                baseTableName="attraction_service"
+                baseColumnNames="service_id"
+                constraintName="fk_attraction_service_service"
+                referencedTableName="service"
+                referencedColumnNames="service_id"/>
+
+    </changeSet>
+</databaseChangeLog>

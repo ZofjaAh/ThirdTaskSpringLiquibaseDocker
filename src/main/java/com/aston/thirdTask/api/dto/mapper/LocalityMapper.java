@@ -6,8 +6,6 @@ import com.aston.thirdTask.domain.Locality;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.Objects;
-
 @Mapper(componentModel = "spring")
 public interface LocalityMapper extends LocalDateMapper {
 

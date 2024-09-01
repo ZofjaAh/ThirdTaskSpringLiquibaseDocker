@@ -43,7 +43,8 @@ services:
   liquibase:
     image: liquibase/liquibase
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - LIQUIBASE_SEARCH_PATH=/usr/local/tomcat/webapps/db/changelog
     volumes:

@@ -8,6 +8,7 @@ import com.aston.thirdTask.domain.Service;
 import org.mapstruct.Mapper;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface AttractionMapper extends LocalDateMapper {
@@ -21,8 +22,8 @@ public interface AttractionMapper extends LocalDateMapper {
                 .build();
     }
 
-    default AttractionDTO map(Attraction attraction){
-       return AttractionDTO.builder()
+    default AttractionDTO map(Attraction attraction) {
+        return AttractionDTO.builder()
                 .attractionId(attraction.getAttractionId())
                 .attractionName(attraction.getAttractionName())
                 .creationDate(mapLocalDateToString(attraction.getCreationDate()))
@@ -41,9 +42,10 @@ public interface AttractionMapper extends LocalDateMapper {
                 .creationDate(mapLocalDateToString(attraction.getCreationDate()))
                 .description(attraction.getDescription())
                 .type(attraction.getType())
-                .serviceNames(Objects.nonNull(attraction.getServices()) ? attraction.getServices().stream()
-                        .map(Service::getServiceName)
-                        .reduce("", (first, second) -> first + ", " + second) : null)
+                .serviceNames(Objects.nonNull(attraction.getServices()) ?
+                        attraction.getServices().stream()
+                                .map(Service::getServiceName)
+                                .collect(Collectors.joining(", ")) : null)
                 .build();
     }
 

@@ -13,7 +13,7 @@ import java.util.Set;
 public class Service {
     Integer serviceId;
     String serviceName;
-   String description;
+    String description;
     Set<Attraction> attractions;
 
 }

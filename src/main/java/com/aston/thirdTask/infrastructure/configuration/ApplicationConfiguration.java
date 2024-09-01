@@ -11,11 +11,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+/**
+ * Spring configuration class for setting up web MVC components.
+ */
 @Configuration
 @ComponentScan(basePackageClasses = ComponentScanMarker.class)
 @Import(PersistenceJPAConfiguration.class)
 @EnableWebMvc
+
 public class ApplicationConfiguration implements WebMvcConfigurer {
+    /**
+     * Configures the message converters for the application.
+     *
+     * @param converters the list of message converters to configure.
+     */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(new MappingJackson2HttpMessageConverter());

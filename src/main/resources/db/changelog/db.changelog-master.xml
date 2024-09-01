@@ -5,10 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="V1_1__init_enum_attraction_type.sql"/>
-    <include file="V1_2__init_locality.sql"/>
-    <include file="V1_3__init_service.sql"/>
-    <include file="V1_4__init_attraction.sql"/>
-    <include file="V1_5__init_attraction_service.sql"/>
+    <include file="V1_1__init_locality.xml"/>
+    <include file="V1_2__init_service.xml"/>
+    <include file="V1_3__init_attraction.xml"/>
+    <include file="V1_4__init_attraction_service.xml"/>
     <include file="V2_1__init_attraction_library_data.sql"/>
 </databaseChangeLog>

@@ -71,6 +71,12 @@ dependencies {
 
 }
 
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('source', '17')
+}
+
 jar {
     archiveFileName = 'attraction_library.war'
     webAppDirName = 'src/main/webapp'

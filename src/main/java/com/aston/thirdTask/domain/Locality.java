@@ -2,7 +2,6 @@ package com.aston.thirdTask.domain;
 
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @With
@@ -14,7 +13,7 @@ import java.util.Set;
 public class Locality {
     Integer localityId;
     String localityName;
-   Integer population;
+    Integer population;
     Boolean metroAvailability;
     Set<Attraction> attractions;
 }

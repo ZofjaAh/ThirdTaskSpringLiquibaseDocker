@@ -13,14 +13,22 @@ import org.springframework.stereotype.Repository;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Repository class for managing Locality entities.
+ */
 @Slf4j
 @Repository
 @AllArgsConstructor
-
 public class LocalityRepository implements LocalityDAO {
     private final LocalityJpaRepository localityJpaRepository;
     private final LocalityEntityMapper localityEntityMapper;
 
+    /**
+     * Creates a new locality.
+     *
+     * @param locality the locality to be created.
+     * @return the created locality.
+     */
     @Override
     public Locality create(Locality locality) {
         return localityEntityMapper.mapFromEntity(
@@ -28,6 +36,12 @@ public class LocalityRepository implements LocalityDAO {
                         localityEntityMapper.map(locality)));
     }
 
+    /**
+     * Finds a locality by its name.
+     *
+     * @param localityName the name of the locality.
+     * @return an Optional containing the found locality, or an empty Optional if not found.
+     */
     @Override
     public Optional<Locality> findLocalityByName(String localityName) {
         return localityJpaRepository.findByLocalityName(localityName)
@@ -35,6 +49,16 @@ public class LocalityRepository implements LocalityDAO {
 
     }
 
+    /**
+     * Changes the population and/or metro availability of a locality.
+     *
+     * @param localityId        the ID of the locality.
+     * @param population        the new population (optional).
+     * @param metroAvailability the new metro availability status (optional).
+     * @return the number of records updated.
+     * @throws NotFoundException   if the locality is not found.
+     * @throws ProcessingException if both population and metro availability are not specified.
+     */
     @Override
     public int changeLocality(Integer localityId, Integer population, Boolean metroAvailability) {
         if (localityJpaRepository.findById(localityId).isPresent()) {
@@ -50,7 +74,7 @@ public class LocalityRepository implements LocalityDAO {
                 }
             } else if (Objects.nonNull(metroAvailability)) {
                 log.info("Parameter attraction population is null");
-              return  localityJpaRepository.changeLocalityMetroAvailability(localityId, metroAvailability);
+                return localityJpaRepository.changeLocalityMetroAvailability(localityId, metroAvailability);
             } else log.error("Parameters population and metro availability are nulls");
             throw new ProcessingException("Parameters population and metro availability are not specified");
         }

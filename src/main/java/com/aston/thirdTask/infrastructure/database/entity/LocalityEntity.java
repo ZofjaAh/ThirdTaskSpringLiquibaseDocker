@@ -2,7 +2,6 @@ package com.aston.thirdTask.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CascadeType;
 
 import java.util.Set;
 
@@ -33,7 +32,6 @@ public class LocalityEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "locality")
     private Set<AttractionEntity> attractions;
-
 
 
 }

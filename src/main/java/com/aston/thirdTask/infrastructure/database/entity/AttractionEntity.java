@@ -1,8 +1,7 @@
 package com.aston.thirdTask.infrastructure.database.entity;
 
-import jakarta.persistence.Entity;
-import lombok.*;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class AttractionEntity {
     @JoinColumn(name = "locality_id")
     private LocalityEntity locality;
 
-    @ManyToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "attraction_service",
             joinColumns = @JoinColumn(name = "attraction_id"), inverseJoinColumns = @JoinColumn(name = "service_id")

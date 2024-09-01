@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="4" author="Sofya Aheyeva">
+        <createTable tableName="attraction">
+            <column name="attraction_id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="attraction_name" type="VARCHAR(64)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="creation_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locality_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="attraction"
+                baseColumnNames="locality_id"
+                constraintName="fk_attraction_locality"
+                referencedTableName="locality"
+                referencedColumnNames="locality_id"/>
+
+    </changeSet>
+</databaseChangeLog>
