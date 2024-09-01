@@ -76,19 +76,12 @@ public interface AttractionJpaRepository extends JpaRepository<AttractionEntity,
     @Modifying
     @Query("""
             UPDATE AttractionEntity att
-            SET att.description = :description 
+            SET att.description = :description
             WHERE att.attractionId = :attractionId
             """
     )
     int changeAttractionDescriptionById(@Param("attractionId") Integer attractionId,
                                         @Param("description") String description);
-
-    /**
-     * Deletes attraction services by attraction ID.
-     *
-     * @param attractionId the ID of the attraction.
-     */
-    @Modifying
-    @Query(value = "DELETE FROM attraction_service WHERE attraction_id = :attractionId", nativeQuery = true)
-    void deleteAttractionServicesByAttractionId(@Param("attractionId") Integer attractionId);
 }
+
+

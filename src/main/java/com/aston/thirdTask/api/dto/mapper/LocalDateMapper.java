@@ -21,10 +21,9 @@ public interface LocalDateMapper {
 
     @Named("mapStringToLocalDate")
     default LocalDate mapStringToLocalDate(String date) {
-        LocalDate localDate = Optional.ofNullable(date)
+
+        return Optional.ofNullable(date)
                 .map(str -> LocalDate.parse(str, LOCAL_DATE_FORMAT))
                 .orElse(null);
-
-        return localDate;
     }
 }
